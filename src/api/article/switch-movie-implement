@@ -1,0 +1,88 @@
+# 影片切换效果实现
+
+项目中需要做一个影片切换的动画，在实现的时候涉及到了一些浏览器的渲染原理，在这里做一点总结。
+
+影片切换的最终效果是这样的：
+
+<center>
+![](/public/switch-movie-qq.gif)  
+</center>
+
+一开始参考了猫眼和淘票票的影片切换效果，但发现它们都只对选中的影片海报进行放大操作，而海报之间的间距却没有变化，如图：
+
+<center>
+![](/public/switch-movie-maoyan.jpg)  
+猫眼（入口：微信钱包-吃喝玩乐-猫眼）
+</center>
+
+<center>
+![](/public/switch-movie-taopiaopiao.jpg)  
+淘票票（入口：支付宝-淘票票）
+</center>
+
+经过分析发现，选中海报是使用`transform scale`属性来进行放大，这样选中的海报会是一个单独的渲染层，不会影响周围的元素，所以造成了如上图间距不一的情况。
+
+```css
+// 使用scale
+.poster {
+    width: 4rem;
+    transform: scale(0.8);
+    transition: transform 0.5s;
+}
+.poster.current {
+    transform: scale(1);
+}
+```
+
+那么要怎么实现动图中即放大选中的海报，同时让海报间距保持一致的效果呢。
+
+如果业务场景是在PC端的话，其实可以使用`width`属性来放大海报。这样当`width`值改变时，会触发浏览器`reflow`和`repaint`，这样海报之间的间距就会始终保持一致。
+
+```css
+// 使用width
+.poster {
+    width: 4rem;
+    transition: width 0.5s;
+}
+.poster.current {
+    width: 5rem;
+}
+```
+
+不过在移动端，这样过多的`reflow`和`repaint`性能并不好，卡顿会比较明显，所以也不能采用这个方法。
+
+> PS：为什么改变`width`值会触发浏览器`reflow`和`repaint`，而改变`transform`值就不会？  
+> 
+> 这里就涉及到了浏览器的渲染原理，当你修改了元素的属性之后，浏览器将会检查为了使这个修改生效是否需要重新计算布局以及更新渲染树，对于DOM元素的“几何属性”修改，比如`width`/`height`/`left`/`top`等，都需要重新计算布局。而只修改`transform`/`opacity`的话，元素会提升为自有的渲染层，并且跳过渲染流程的布局和绘制环节，只做渲染层的合并。[了解更多详细原理](#reference)
+
+后来经过一番思考，使用`transform scale`来进行放大，其实就是放大后的海报把原本的间隙给占了，所以只需要对选中海报两边的元素使用`transform translate3d`进行相应的位移即可保持海报间隙一致。
+
+<center>
+![](/public/switch-movie-qq.jpg)  
+娱票儿QQ电影票（入口：手Q钱包-电影票）
+</center>
+
+```css
+// 使用scale与translate3d
+.poster {
+    width: 4rem;
+    transition: transform 0.5s;
+}
+.poster.current {
+    transform: scale(1) translate3d(0, 0, 0);
+}
+.poster.prev {
+    transform: scale(0.8) translate3d(-0.4rem, 0, 0);
+}
+.poster.next {
+    transform: scale(0.8) translate3d(0.4rem, 0, 0);
+}
+```
+
+这么一来，即保持了海报间距一致，也让切换动画在移动端更自然流畅。
+
+## reference
+
+> [哪些属性会引起reflow、repaint](https://csstriggers.com/)  
+> [Accelerated Rendering in Chrome](https://www.html5rocks.com/en/tutorials/speed/layers/)  
+> [深度剖析浏览器渲染性能原理，你到底知道多少？](http://www.jianshu.com/p/a32b890c29b1)   

@@ -16,9 +16,12 @@ class ArticlesItem extends React.Component {
                             : <Link to={item.url}>{item.title}</Link>
                     }
                 </h2>
-                <blockquote className="article-from">
-                   { item.from ? `from ${item.from}` : '原创' } 
-                </blockquote>
+                {
+                    !!item.from &&
+                        <blockquote className="article-from">
+                            from {item.from}
+                        </blockquote>
+                }
                 <p className="article-p">
                     {item.desc}
                 </p>

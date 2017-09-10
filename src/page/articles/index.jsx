@@ -19,8 +19,8 @@ class Articles extends React.Component {
         return (
             <section className="articles">
                 {
-                    list && list.map((item) => 
-                        <ArticleItem key={item.id} item={item} />
+                    list && list.map((item, i) => 
+                        <ArticleItem key={i} item={item} />
                     )
                 }
             </section>
