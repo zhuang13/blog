@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 import connect from 'utils/connect.js'
-import marked from 'marked';
+import MarkDown from 'components/Markdown/index.jsx'
 import './style.scss'
 
 class Article extends React.Component {
@@ -14,13 +14,7 @@ class Article extends React.Component {
     }
 
     render() {
-        if (!this.props.articles.article) {
-            return null
-        }
-        return (
-            <div className="article" dangerouslySetInnerHTML={{__html: marked(this.props.articles.article)}}>
-            </div>
-        )
+        return this.props.articles.article ? <MarkDown markdown={this.props.articles.article} /> : null
     }
 }
 

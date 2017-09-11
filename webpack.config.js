@@ -9,7 +9,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        publicPath: '/',
+        publicPath: '//zhuangbob.com/',
         filename: "index.[hash].js",
         chunkFilename: '[name].[chunkhash].js'
     },

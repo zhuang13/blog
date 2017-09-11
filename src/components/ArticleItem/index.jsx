@@ -3,7 +3,7 @@ import { Route, Link } from 'react-router-dom'
 import connect from 'utils/connect.js'
 import './style.scss'
 
-class ArticlesItem extends React.Component {
+class ArticleItem extends React.Component {
 
     render() {
         const item = this.props.item;
@@ -30,4 +30,4 @@ class ArticlesItem extends React.Component {
     }
 }
 
-export default connect(ArticlesItem)
+export default connect(ArticleItem)
