@@ -16,6 +16,8 @@ let store = createStore(
 import loadHeader from 'bundle-loader?lazy&name=header!components/Header/index.jsx'
 const Header = (props) => (<Bundle load={loadHeader} loadingComp={(<div></div>)} {...props} />)
 
+import Footer from 'components/Footer/index.jsx'
+
 import loadArticles from 'bundle-loader?lazy&name=articles!./articles/index.jsx'
 const Articles = (props) => (<Bundle load={loadArticles} loadingComp={(<div></div>)} {...props} />)
 
@@ -33,6 +35,7 @@ ReactDOM.render(
                 <Route path="/" exact component={Articles} />
                 <Route path="/about" exact component={About} />
                 <Route path="/article/:id" exact component={Article} />
+                <Footer />
             </div>
         </Router>
     </Provider>, 
