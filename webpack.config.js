@@ -9,7 +9,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        publicPath: '//zhuang13.me/',
+        publicPath: '/',
         filename: "index.[hash].js",
         chunkFilename: '[name].[chunkhash].js'
     },
@@ -40,7 +40,7 @@ module.exports = {
             { test: /\.jsx$/, exclude: /node_modules/, loader: "babel-loader", query: {presets: ['es2015', 'react', 'stage-0']} },
             { test: /\.css$/, exclude: /node_modules/, loader: "style-loader!css-loader" },
             { test: /\.scss$/, exclude: /node_modules/, loader: "style-loader!css-loader!sass-loader" },
-            { test: /\.(png|jpg|gif|jpeg)$/, exclude: /node_modules/, loader: "url-loader", query: {limit: 100, name: "/assets/images/[name].[hash].[ext]"} }
+            { test: /\.(png|jpg|gif|jpeg)$/, exclude: /node_modules/, loader: "url-loader", query: {limit: 100, name: "assets/images/[name].[hash].[ext]"} }
         ]
     },
     resolve: {

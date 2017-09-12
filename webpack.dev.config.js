@@ -50,12 +50,6 @@ module.exports = {
             index: '/',
             rewrites: [
                 {
-                    from: /^\/assets\/.*$/,
-                    to: function(context) {
-                        return './src' + context.parsedUrl.pathname
-                    }
-                },
-                {
                     from: /^\/api\/.*$/,
                     to: function(context) {
                         return './src' + context.parsedUrl.pathname
