@@ -1,3 +1,5 @@
+@import '../../scss/vars.scss';
+
 .header { 
     padding: 20px; overflow: hidden;
 
@@ -8,13 +10,13 @@
         &-list { text-align: center; }
         &-item { 
             padding: 25px; display: inline-block; text-align: center; 
-            a { height: 1.2em; cursor: pointer; display: inline-block; border-bottom: 2px solid transparent; transform: scale(0.9, 0.9); transition: transform .3s; }
-            a.select, a:hover { display: inline-block; border-bottom: 2px solid #42b983; transform: scale(1.2, 1.2); transition: transform .3s; }
+            a { height: 1.2em; cursor: pointer; display: inline-block; border-bottom: 2px solid transparent; transform: scale(0.9); transition: transform .3s; }
+            a.select, a:hover { display: inline-block; border-bottom: 2px solid $theme-color; transform: scale(1.2); transition: transform .3s; }
         }
     }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: $small-screen-width) {
     .header { 
         padding: 20px 20px 0; 
         &-nav { float: none; }

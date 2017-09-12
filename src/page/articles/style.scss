@@ -1,3 +1,5 @@
-@media screen and (max-width: 700px) {
-	.articles { padding: 10px; }
+@import '../../scss/vars.scss';
+
+@media screen and (max-width: $small-screen-width) {
+	.articles { padding: 0 10px; }
 } 

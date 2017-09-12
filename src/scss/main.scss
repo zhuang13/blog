@@ -1,11 +1,13 @@
-body { margin: 0; font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif; color: #34495e; }
+@import './vars.scss';
+
+body { margin: 0; font-weight: 300; font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif; color: #34495e; }
 ul { margin: 0; padding: 0;  }
 a { color: #34495e; text-decoration: none; }
 
-@media screen and (min-width: 700px) {
-	body { margin: auto; width: 700px; } 
+@media screen and (min-width: $small-screen-width) {
+	body { margin: auto; width: 690px; } 
 }
 
-@media screen and (max-width: 700px) {
-	body { width: 94%; padding: 0 3%; } 
-} 
+@media screen and (max-width: $small-screen-width) {
+	body { width: 100%; } 
+}

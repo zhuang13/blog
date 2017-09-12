@@ -1,3 +1,5 @@
+@import '../../scss/vars.scss';
+
 .markdown {
     color: #34495e;
 
@@ -24,7 +26,7 @@
         
         &:after {
             content: "#";
-            color: #42b983;
+            color: $theme-color;
             position: absolute;
             left: -0.7em;
             top: -4px;
@@ -63,16 +65,16 @@
     blockquote {
         margin: 2em 0;
         padding-left: 15px;
-        border-left: 4px solid #42b983;
+        border-left: 4px solid $theme-color;
     }
 
     a {
-        color: #42b983;
+        color: $theme-color;
         word-break: break-all;
     }
 
     a:hover {
-        border-bottom: 1px solid #42b983;
+        border-bottom: 1px solid $theme-color;
     }
 
     code {
@@ -92,9 +94,9 @@
     }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: $small-screen-width) {
     .markdown {
-        padding: 10px;
+        padding: 0 20px;
 
         h2 {
             left: 15px;

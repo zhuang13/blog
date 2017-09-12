@@ -1,9 +1,11 @@
+@import '../../scss/vars.scss';
+
 .footer {
     color: #aaa;
     font-size: 14px;
     line-height: 1.6em;
     text-align: center;
-    margin: 60px 0;
+    margin: 5vw 0;
     padding: 14px 0;
-    border-top: 1px solid #ddd;
+    @include border-1px(top, #ddd);
 }
