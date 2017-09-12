@@ -13,8 +13,12 @@ class Article extends React.Component {
         this.props.actions.fetchArticle(id)
     }
 
+    componentWillUnmount() {
+        this.props.actions.resetArticle();
+    }
+
     render() {
-        return this.props.articles.article ? <MarkDown markdown={this.props.articles.article} /> : null
+        return this.props.articles.article.markdown ? <MarkDown markdown={this.props.articles.article.markdown} /> : null
     }
 }
 

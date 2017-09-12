@@ -1,7 +1,8 @@
 const receivedArticles = (list) => {
     return {
         type: 'receivedArticles',
-        list
+        list,
+        article: {}
     }
 }
 
@@ -27,7 +28,17 @@ export const fetchArticle = (id) => {
         fetch(`/api/article/${id}`)
             .then(resp => resp.text())
             .then(data => {
-                dispatch(receivedArticle(data))
+                let article = {
+                    id, 
+                    markdown: data
+                }
+                dispatch(receivedArticle(article))
             })
     }
+}
+
+export const resetArticle = () => {
+    return (dispatch) => dispatch({
+        type: 'resetArticle'
+    })
 }

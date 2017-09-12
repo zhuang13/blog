@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import connect from 'utils/connect.js'
 import './style.scss'
 
-import img from 'assets/images/test.png';
+import img from 'assets/images/test.png'
 
 class Header extends React.Component {
     static contextTypes = {
