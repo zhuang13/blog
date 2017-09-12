@@ -25,6 +25,8 @@ const About = (props) => (<Bundle load={loadAbout} loadingComp={(<div></div>)} {
 import loadArticle from 'bundle-loader?lazy&name=article!./article/index.jsx'
 const Article = (props) => (<Bundle load={loadArticle} loadingComp={(<div></div>)} {...props} />)
 
+import Footer from 'components/Footer/index.jsx'
+
 ReactDOM.render(
     <Provider store={store}>
         <Router>
@@ -33,6 +35,7 @@ ReactDOM.render(
                 <Route path="/" exact component={Articles} />
                 <Route path="/about" exact component={About} />
                 <Route path="/article/:id" exact component={Article} />
+                <Footer />
             </div>
         </Router>
     </Provider>, 
