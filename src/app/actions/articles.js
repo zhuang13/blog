@@ -1,3 +1,5 @@
+import 'whatwg-fetch'
+
 const receivedArticles = (list) => {
     return {
         type: 'receivedArticles',
