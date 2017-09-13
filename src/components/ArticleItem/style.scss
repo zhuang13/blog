@@ -8,13 +8,24 @@
     }
     
     &-title { 
-        margin: 20px 0; 
+        margin: 10px 0; 
         a { cursor: pointer; padding: 2px 0; }
         a:hover { border-bottom: 2px solid $theme-color; }
     }
     
     &-from { color: #7f8c8d; margin: 20px 0; font-size: 14px; padding-left: 10px; border-left: 4px solid $theme-color; }
-    &-p { font-size: 15px; margin:30px 0; line-height: 1.6; }
+    &-p { font-size: 15px; margin: 15px 0; line-height: 1.6; }
+
+    &-tag {
+        margin-right: 4px;
+        padding: 2px 5px;
+        color: #f8f8f8;
+        border-radius: 2px;
+        white-space: inherit;
+        font-size: 10px;
+        background-color: $theme-color;
+        font-family: 'Roboto Mono', Monaco, courier, monospace;
+    }
 }
 
 @media screen and (max-width: $small-screen-width) {

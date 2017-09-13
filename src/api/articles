@@ -2,6 +2,7 @@
     {
         "title": "影片切换效果实现",
         "desc": "项目中需要做一个影片切换的动画，在实现的时候涉及到了一些浏览器的渲染原理，在这里做一点总结。",
+        "tags": ["qq电影票", "css"],
         "url": "/article/switch-movie-implement"
     },
     {

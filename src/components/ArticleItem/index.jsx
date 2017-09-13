@@ -17,6 +17,11 @@ class ArticleItem extends React.Component {
                     }
                 </h2>
                 {
+                    !!item.tags && item.tags.map((tag) => 
+                        <span className="article-tag" key={tag}>{tag}</span>
+                    )
+                }
+                {
                     !!item.from &&
                         <blockquote className="article-from">
                             from {item.from}
