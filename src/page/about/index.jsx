@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Link } from 'react-router-dom'
 import connect from 'utils/connect.js'
 import MarkDown from 'components/Markdown/index.jsx'
+import Loading from 'components/Loading/index.jsx'
 import './style.scss'
 
 
@@ -18,7 +19,9 @@ class About extends React.Component {
     }
 
     render() {
-        return this.props.articles.article.markdown ? <MarkDown markdown={this.props.articles.article.markdown} /> : null
+        return this.props.articles.article.markdown ? 
+            <MarkDown markdown={this.props.articles.article.markdown} /> 
+            : <Loading />
     }
 }
 

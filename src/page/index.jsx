@@ -13,19 +13,21 @@ let store = createStore(
     applyMiddleware(thunkMiddleware)
 )
 
+import Loading from 'components/Loading/index.jsx'
+
 import loadHeader from 'bundle-loader?lazy&name=header!components/Header/index.jsx'
-const Header = (props) => (<Bundle load={loadHeader} loadingComp={(<div></div>)} {...props} />)
+const Header = (props) => (<Bundle load={loadHeader} loadingComp={(<Loading />)} {...props} />)
 
 import Footer from 'components/Footer/index.jsx'
 
 import loadArticles from 'bundle-loader?lazy&name=articles!./articles/index.jsx'
-const Articles = (props) => (<Bundle load={loadArticles} loadingComp={(<div></div>)} {...props} />)
+const Articles = (props) => (<Bundle load={loadArticles} loadingComp={(<Loading />)} {...props} />)
 
 import loadAbout from 'bundle-loader?lazy&name=about!./about/index.jsx'
-const About = (props) => (<Bundle load={loadAbout} loadingComp={(<div></div>)} {...props} />)
+const About = (props) => (<Bundle load={loadAbout} loadingComp={(<Loading />)} {...props} />)
 
 import loadArticle from 'bundle-loader?lazy&name=article!./article/index.jsx'
-const Article = (props) => (<Bundle load={loadArticle} loadingComp={(<div></div>)} {...props} />)
+const Article = (props) => (<Bundle load={loadArticle} loadingComp={(<Loading />)} {...props} />)
 
 ReactDOM.render(
     <Provider store={store}>
