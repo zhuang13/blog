@@ -6,6 +6,13 @@
         "url": "/article/switch-movie-implement"
     },
     {
+        "title": "选座验证的优化",
+        "desc": "",
+        "tags": ["qq电影票", "js"],
+        "from": "zcw.me",
+        "url": "http://zcw.me/blogwp/xuan-zuo-de-you-hua-zhong-gou/"
+    },
+    {
         "title": "welcome",
         "desc": "欢迎你，本博客用以记录自己一些日常的学习笔记和项目心得，作为自己的技术积累，希望也能给你带来帮助。",
         "url": "/article/welcome"
