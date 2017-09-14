@@ -29,6 +29,15 @@ const About = (props) => (<Bundle load={loadAbout} loadingComp={(<Loading />)} {
 import loadArticle from 'bundle-loader?lazy&name=article!./article/index.jsx'
 const Article = (props) => (<Bundle load={loadArticle} loadingComp={(<Loading />)} {...props} />)
 
+// 根部font-size自适应，整体rem自适应
+let change = () => {
+    document.documentElement.style.fontSize = Math.min(22, 14 * document.documentElement.clientWidth / 320)  +'px';
+}
+change();
+window.addEventListener('resize', function(){
+    change();
+}, false);
+
 ReactDOM.render(
     <Provider store={store}>
         <Router>

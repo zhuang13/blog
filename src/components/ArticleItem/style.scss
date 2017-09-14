@@ -2,37 +2,47 @@
 
 .article {
     &-intro { 
-        padding: 10px 0; position: relative; 
+        padding: 0.625rem 0;
         @include border-1px(bottom, #ddd);
         &:last-child:after { border-bottom: 0; }
     }
     
     &-title { 
-        margin: 10px 0; 
-        a { cursor: pointer; padding: 2px 0; }
-        a:hover { border-bottom: 2px solid $theme-color; }
+        margin: 0.3125rem 0; 
+        font-size: 1rem;
+
+        a { 
+            cursor: pointer; 
+            padding: 0.125rem 0; 
+        }
+        
+        a:hover { 
+            border-bottom: 2px solid $theme-color; 
+        }
     }
     
-    &-from { color: #7f8c8d; margin: 20px 0; font-size: 14px; padding-left: 10px; border-left: 4px solid $theme-color; }
-    &-p { font-size: 15px; margin: 15px 0; line-height: 1.6; }
+    &-from { 
+        color: #7f8c8d; 
+        margin: 0.625rem 0; 
+        font-size: 0.75rem; 
+        padding-left: 0.625rem; 
+        border-left: 0.25rem solid $theme-color; 
+    }
+
+    &-p { 
+        font-size: 0.75rem; 
+        margin: 0.9375rem 0; 
+        line-height: 1.2rem; 
+    }
 
     &-tag {
-        margin-right: 4px;
-        padding: 2px 5px;
+        margin-right: 0.25rem;
+        padding: 0.125rem 0.3125rem;
         color: #f8f8f8;
-        border-radius: 2px;
+        border-radius: 0.125rem;
         white-space: inherit;
-        font-size: 10px;
+        font-size: 0.625rem;
         background-color: $theme-color;
         font-family: 'Roboto Mono', Monaco, courier, monospace;
     }
 }
-
-@media screen and (max-width: $small-screen-width) {
-    .article {
-        &-intro { padding: 10px; }
-        &-title { font-size: 16px; margin: 5px 0; }
-        &-from { font-size: 12px; margin: 10px 0; }
-        &-p { font-size: 12px; margin: 15px 0; }
-    }
-} 

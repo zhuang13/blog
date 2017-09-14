@@ -4,8 +4,8 @@
     color: #34495e;
 
     p {
-        font-size: 14px;
-        line-height: 1.6;
+        font-size: 0.8rem;
+        line-height: 1.2rem;
     }
 
     img {
@@ -13,39 +13,39 @@
     }
 
     h1 {
-        margin: 0.65em 0;
+        margin: 0.65rem 0;
         color: #2c3e50;
-        font-size: 20px;
+        font-size: 1.25rem;
     }
 
     h2 {
         position: relative;
-        font-size: 22px;
-        margin: 1.5em 0 0.8em;
-        max-width: 280px;
+        font-size: 1.375rem;
+        margin: 2rem 0 1.1rem;
+        max-width: 17.5rem;
         
         &:after {
             content: "#";
             color: $theme-color;
             position: absolute;
-            left: -0.7em;
-            top: -4px;
-            font-size: 1.2em;
+            left: -1.15rem;
+            top: -0.25rem;
+            font-size: 1.65rem;
             font-weight: bold;
         }
     }
 
     ul {
         margin: 1rem 0;
-        padding: 0 35px;
+        padding: 0 2.1875rem;
 
         li {
-            line-height: 1.6;
+            line-height: 1.2rem;
         }
     }
 
     pre {
-        padding: 16px;
+        padding: 1rem;
         overflow: auto;
         font-size: 85%;
         line-height: 1.45;
@@ -64,8 +64,8 @@
 
     blockquote {
         margin: 2em 0;
-        padding-left: 15px;
-        border-left: 4px solid $theme-color;
+        padding-left: 0.9475rem;
+        border-left: 0.25rem solid $theme-color;
     }
 
     a {
@@ -78,8 +78,8 @@
     }
 
     code {
-        margin: 0 4px;
-        padding: 2px 5px;
+        margin: 0 0.25rem;
+        padding: 0.125rem 0.3125rem;
         color: #e96900;
         border-radius: 2px;
         white-space: inherit;
@@ -89,14 +89,14 @@
     }
 
     center {
-        margin-bottom: 15px;
-        font-size: 12px;
+        margin-bottom: 0.9375rem;
+        font-size: 0.75rem;
     }
 }
 
 @media screen and (max-width: $small-screen-width) {
     .markdown {
-        padding: 0 20px;
+        padding: 0 1.25rem;
 
         h2 {
             left: 15px;
