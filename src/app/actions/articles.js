@@ -1,4 +1,4 @@
-import 'whatwg-fetch'
+import request from 'utils/request.js'
 
 const receivedArticles = (list) => {
     return {
@@ -10,10 +10,12 @@ const receivedArticles = (list) => {
 
 export const fetchArticles = () => {
     return (dispatch) => {
-        fetch('/api/articles')
-            .then(resp => resp.json())
+        request.GET('/api/articles')
             .then(data => {
                 dispatch(receivedArticles(data))
+            })
+            .catch(err => {
+                console.log(err.message)
             })
     }
 }
@@ -27,14 +29,16 @@ const receivedArticle = (article) => {
 
 export const fetchArticle = (id) => {
     return (dispatch) => {
-        fetch(`/api/article/${id}`)
-            .then(resp => resp.text())
+        request.GET(`/api/article/${id}`, {}, { dataType: 'text' })
             .then(data => {
                 let article = {
                     id, 
                     markdown: data
                 }
                 dispatch(receivedArticle(article))
+            })
+            .catch(err => {
+                console.log(err.message)
             })
     }
 }

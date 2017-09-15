@@ -1,6 +1,7 @@
 var webpack = require("webpack");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 var path = require('path');
 
 module.exports = {
@@ -31,7 +32,13 @@ module.exports = {
             'process.env': {
                 NODE_ENV: JSON.stringify('production')
             }
-        })
+        }),
+        new CopyWebpackPlugin([ 
+                { from: 'src/api', to: 'api' },
+                { from: 'src/public', to: 'public' }
+            ], {
+                debug: 'warning'
+            })
     ],
     module: {
         loaders: [
