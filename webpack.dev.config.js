@@ -2,14 +2,15 @@ var webpack = require("webpack");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 var path = require('path');
+var config = require('config');
 
 module.exports = {
     entry: {
-        bundle: "./src/page/index.jsx"
+        bundle: "./src/page/client.jsx"
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        publicPath: '/',
+        publicPath: config.cdn + '/',
         filename: "index.js",
         chunkFilename: '[name].js'
     },

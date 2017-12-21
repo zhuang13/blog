@@ -3,14 +3,15 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var path = require('path');
+var config = require('config');
 
 module.exports = {
     entry: {
-        bundle: "./src/page/index.jsx"
+        bundle: "./src/page/client.jsx"
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        publicPath: '/',
+        publicPath: config.cdn + '/',
         filename: "index.[hash].js",
         chunkFilename: '[name].[chunkhash].js'
     },

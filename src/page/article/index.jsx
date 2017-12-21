@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom'
 import connect from 'utils/connect.js'
 import MarkDown from 'components/Markdown/index.jsx'
 import Loading from 'components/Loading/index.jsx'
-import './style.scss'
+// import './style.scss'
 
 class Article extends React.Component {
 
@@ -11,7 +11,10 @@ class Article extends React.Component {
         super(props)
 
         let { id } = this.props.match.params
-        this.props.actions.fetchArticle(id)
+        let { article } = this.props.articles;
+
+        ( !article.id || article.id != id ) &&
+            this.props.actions.fetchArticle(id)
     }
 
     componentWillUnmount() {
@@ -19,9 +22,9 @@ class Article extends React.Component {
     }
 
     render() {
-        return this.props.articles.article.markdown ? 
-            <MarkDown markdown={this.props.articles.article.markdown} /> 
-            : <Loading />
+        const markdown = this.props.articles.article.markdown
+        return ( markdown ? <MarkDown markdown={this.props.articles.article.markdown} /> 
+            : <Loading />)
     }
 }
 

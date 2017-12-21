@@ -1,4 +1,4 @@
-import 'whatwg-fetch'
+import 'isomorphic-fetch'
 
 const defaultOptions = {
     dataType: 'json'
@@ -22,11 +22,13 @@ const request = (url, data, method, options) => {
             } else {
                 throw new Error('出错了, 请稍后再重试 -_#')
             }
-        })
+        }).catch(err => {
+            console.log('err', err);
+        });
 }
 
 const GET = (url, data, options) => {
-    return request(url, data, 'GET', options)
+    return request(url, null, 'GET', options)
 }
 
 const POST = (url, data, options) => {

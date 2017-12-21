@@ -4,18 +4,9 @@ import { Link } from 'react-router-dom'
 import connect from 'utils/connect.js'
 import './style.scss'
 
-import img from 'assets/images/test.png'
-
 class Header extends React.Component {
     static contextTypes = {
         router: PropTypes.object
-    }
-
-    componentWillMount() {
-        const { pathname } = this.props.location;
-        let nav = pathname.slice(1, pathname.length);
-        nav = nav == 'about' ? nav : 'blog'
-        this.props.actions.changeCurrentNav(nav);
     }
 
     changePage(nav) {

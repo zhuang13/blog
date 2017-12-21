@@ -3,7 +3,7 @@ import { Route, Link } from 'react-router-dom'
 import connect from 'utils/connect.js'
 import MarkDown from 'components/Markdown/index.jsx'
 import Loading from 'components/Loading/index.jsx'
-import './style.scss'
+// import './style.scss'
 
 
 class About extends React.Component {
@@ -11,7 +11,10 @@ class About extends React.Component {
     constructor(props) {
         super(props)
 
-        this.props.actions.fetchArticle('about')
+        let { article } = this.props.articles;
+
+        ( !article.id || article.id != 'about' ) &&
+            this.props.actions.fetchArticle('about')
     }
 
     componentWillUnmount() {
