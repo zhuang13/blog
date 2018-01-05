@@ -13,6 +13,8 @@ moduleAlias.addAliases({
     'node': path.join(__dirname, './src/node'),
 });
 
+var config = require('config');
+
 // 解析scss
 var sass = require('node-sass');
 var loadSass = function(scss_content, scss_dir) {
@@ -24,24 +26,42 @@ var loadSass = function(scss_content, scss_dir) {
             return { file: path.join(scss_dir, url) }
         }
     });
-    return obj.css.toString().replace('\n', '').replace(/\"/g, '\\\"');
+    return obj.css.toString();
 }
 
 // 重写scss文件的引入
-global.scss = '';
 var old = require.extensions['.js'];
 require.extensions['.scss'] = function (mod, filename) {
     var compile = mod._compile;
 
     mod._compile = function (code, filename) {
-        // let scssDir = path.dirname(filename);
-        // code = loadSass(code, scssDir);
-        // code = `global.scss += "${code}"`;
-        code = '';
+        let scssDir = path.dirname(filename);
+        code = '$CDN: "' + config.CDN + '";' + code;
+        code = loadSass(code, scssDir).replace('\n', '').replace(/\"/g, '\\\"');
+        code = `var css = "${code}";module.exports = css;`;
         compile.call(mod, code, filename);
     }
 
     old(mod, filename);
 }
 
-require('./src/node/app');
+if (config.PRODUCTION) {
+    let webpack = require("webpack");
+    let webpackConfig = require('./webpack.config.js');
+
+    webpack(webpackConfig, (err, stats) => {
+        let output = stats.toJson();
+        if (err || stats.hasErrors() || stats.hasWarnings()) {
+            console.log('err:', err, output);
+        } else {
+            let bundleName = output.assetsByChunkName.bundle;
+            let createApp = require('./src/node/app').default;
+            createApp(bundleName);
+            console.log(`open in ${config.HOST}`);
+        }
+    });
+} else {
+    let createApp = require('./src/node/app').default;
+    createApp();
+    console.log(`open in ${config.HOST}:${config.PORT}`);
+}

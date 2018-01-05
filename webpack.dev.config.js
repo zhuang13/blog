@@ -10,7 +10,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        publicPath: config.cdn + '/',
+        publicPath: config.CDN + '/',
         filename: "index.js",
         chunkFilename: '[name].js'
     },
@@ -19,21 +19,28 @@ module.exports = {
             template: 'src/index.html'
         }),
         new CleanWebpackPlugin(['dist']),
-        new webpack.DefinePlugin({
-            PRODUCTION: 'false',
-            'process.env': {
-                NODE_ENV: JSON.stringify('development')
-            }
-        })
     ],
     module: {
         loaders: [
             { test: /\.html$/, exclude: /node_modules/, loader: 'html-loader' },
             { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader", query: {presets: ['es2015']} },
             { test: /\.jsx$/, exclude: /node_modules/, loader: "babel-loader", query: {presets: ['es2015', 'react', 'stage-0']} },
-            { test: /\.css$/, exclude: /node_modules/, loader: "style-loader!css-loader" },
-            { test: /\.scss$/, exclude: /node_modules/, loader: "style-loader!css-loader!sass-loader" },
-            { test: /\.(png|jpg|gif|jpeg)$/, exclude: /node_modules/, loader: "url-loader", query: {limit: 100, name: "assets/images/[name].[ext]"} }
+            { test: /\.css$/, exclude: /node_modules/, loader: "to-string-loader!css-loader" },
+            { 
+                test: /\.scss$/,
+                use: [
+                    'to-string-loader',
+                    'css-loader',
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            outputStyle: 'compressed',
+                            data: '$CDN: "' + config.CDN + '";'
+                        }
+                    }
+                ]
+            },
+            { test: /\.(png|jpg|gif|jpeg)$/, exclude: /node_modules/, loader: "url-loader", query: {limit: 8096, name: "assets/images/[name].[ext]"} }
         ]
     },
     resolve: {

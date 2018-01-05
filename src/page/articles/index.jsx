@@ -1,6 +1,7 @@
 import React from 'react'
 import connect from 'utils/connect.js'
-import './style.scss'
+import Css from 'utils/css.jsx'
+import cssCode from './style.scss'
 
 import Loading from 'components/Loading/index.jsx'
 import ArticleItem from 'components/ArticleItem/index.jsx'
@@ -19,6 +20,7 @@ class Articles extends React.Component {
 
         return (
             <section className="articles">
+                <Css cssCode={cssCode} />
                 {
                     list ? 
                         list.map((item, i) => 

@@ -2,7 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import connect from 'utils/connect.js'
-import './style.scss'
+import Css from 'utils/css.jsx'
+import cssCode from './style.scss'
 
 class Header extends React.Component {
     static contextTypes = {
@@ -21,6 +22,7 @@ class Header extends React.Component {
         navClass[currentNav] = 'select';
         return (
             <header className="header">
+                <Css cssCode={cssCode} />
                 <a className="header-gohome"><div className="header-logo"></div></a>
                 <nav className="header-nav">
                 <ul className="header-nav-list">

@@ -7,10 +7,12 @@ import initStore from 'node/initStore'
 
 import Header from 'components/Header/index.jsx'
 import Footer from 'components/Footer/index.jsx'
-import 'scss/main.scss'
+import Css from 'utils/css.jsx'
+import cssCode from 'scss/main.scss'
 
 const getApp = url => () => (
     <div>
+        <Css cssCode={cssCode} />
         <Header />
         {
             routes.map(r => {

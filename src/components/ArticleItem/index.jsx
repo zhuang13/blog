@@ -1,7 +1,8 @@
 import React from 'react'
 import { Route, Link } from 'react-router-dom'
 import connect from 'utils/connect.js'
-import './style.scss'
+import Css from 'utils/css.jsx'
+import cssCode from './style.scss'
 
 class ArticleItem extends React.Component {
 
@@ -9,6 +10,7 @@ class ArticleItem extends React.Component {
         const item = this.props.item;
         return (
             <article className="article-intro">
+                <Css cssCode={cssCode} />
                 <h2 className="article-title"> 
                     {
                         item.from ?

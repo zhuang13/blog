@@ -5,7 +5,7 @@ import config from 'config'
 const initStore = {}
 
 initStore.articles = () => {
-    return request.GET(`${config.host}/api/articles`).then((data) => {
+    return request.GET(`${config.HOST}/api/articles`).then((data) => {
         let store = {
             nav: {
                 current: 'blog'
@@ -20,7 +20,7 @@ initStore.articles = () => {
 }
 
 initStore.about = () => {
-    return request.GET(`${config.host}/api/article/about`, {}, { dataType: 'text' }).then((data) => {
+    return request.GET(`${config.HOST}/api/article/about`, {}, { dataType: 'text' }).then((data) => {
         let store = {
             nav: {
                 current: 'about'
@@ -39,7 +39,7 @@ initStore.about = () => {
 
 initStore.article = (params) => {
     let id = params.id
-    return request.GET(`${config.host}/api/article/${id}`, {}, { dataType: 'text' }).then((data) => {
+    return request.GET(`${config.HOST}/api/article/${id}`, {}, { dataType: 'text' }).then((data) => {
         let store = {
             nav: {
                 current: 'blog'

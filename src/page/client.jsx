@@ -11,7 +11,8 @@ import Bundle from 'utils/bundle.jsx'
 import Loading from 'components/Loading/index.jsx'
 import Header from 'components/Header/index.jsx'
 import Footer from 'components/Footer/index.jsx'
-import 'scss/main.scss'
+import Css from 'utils/css.jsx'
+import cssCode from 'scss/main.scss'
 
 // 声明延迟加载的组件
 let loads = {}, comps = {}
@@ -47,6 +48,7 @@ const isLoadComplete = (comp) => {
             <Provider store={store}>
                 <Router>
                     <div>
+                        <Css cssCode={cssCode} />
                         <Header />
                         {
                             routes.map(r => {

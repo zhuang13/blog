@@ -8,8 +8,8 @@
         width: 90px; 
         height: 50px; 
         margin: 15px auto; 
-        background: url('../../assets/images/test.png') no-repeat 0 0;
-        // -webkit-animation:run 350ms steps(1) infinite 0s; 
+        background: url(#{$CDN}/public/test.png) no-repeat 0 0;
+        // animation:run 350ms steps(1) infinite 0s; 
     }
 
     &-nav { 
