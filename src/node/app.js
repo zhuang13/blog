@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server'
 import { StaticRouter } from 'react-router'
+import { Route, matchPath } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import app from 'http'
 import fs from 'fs'
 import path from 'path'
 import config from 'config'
 
+import routes from 'app/configs/routes.js'
 import { getApp, getStore } from '../page/server.jsx'
 
 let bundleName = 'index.js';
@@ -19,9 +21,21 @@ const server = (req, resp) => {
         return; 
     }
 
-    let App = getApp(req.url)
+    let initStores = []
 
-    getStore(req.url).then((store) => {
+    const routesDOM = routes.map(r => {
+        const match = matchPath(req.url, r)
+        let component;
+        if (match) {
+            component = require(r.src).default 
+            initStores.push({initStore: r.initStore, params: match.params})
+        }
+        return <Route key={r.src} {...r} component={component} />
+    })
+
+    let App = getApp(routesDOM)
+
+    getStore(initStores).then((store) => {
         const context = {}
         const markup = ReactDOMServer.renderToString(
             <Provider store={store}>

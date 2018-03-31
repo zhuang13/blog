@@ -1,46 +1,12 @@
 import request from 'utils/request.js'
-
-const receivedArticles = (list) => {
-    return {
-        type: 'receivedArticles',
-        list,
-        article: {}
-    }
-}
+import { articles, article } from 'app/stores/articles.js'
 
 export const fetchArticles = () => {
-    return (dispatch) => {
-        request.GET('/api/articles')
-            .then(data => {
-                dispatch(receivedArticles(data))
-            })
-            .catch(err => {
-                console.log(err.message)
-            })
-    }
-}
-
-const receivedArticle = (article) => {
-    return {
-        type: 'receivedArticle',
-        article
-    }
+    return articles;
 }
 
 export const fetchArticle = (id) => {
-    return (dispatch) => {
-        request.GET(`/api/article/${id}`, {}, { dataType: 'text' })
-            .then(data => {
-                let article = {
-                    id, 
-                    markdown: data
-                }
-                dispatch(receivedArticle(article))
-            })
-            .catch(err => {
-                console.log(err.message)
-            })
-    }
+    return (dispatch) => { article(dispatch, {id}) };
 }
 
 export const resetArticle = () => {
