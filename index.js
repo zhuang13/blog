@@ -29,6 +29,21 @@ var loadSass = function(scss_content, scss_dir) {
     return obj.css.toString();
 }
 
+require('asset-require-hook')({
+    extensions: ['jpg', 'png', 'gif', 'webp'],
+    name: '[name].[hash].[ext]',
+    publicPath: config.CDN + '/assets/images/',
+    limit: 8096
+})
+
+var replaceImagePath = function(scssDir, imagePath) {
+    let p = imagePath.slice(4, imagePath.length-1);
+    let imageAbsolutePath = path.join(scssDir, p);
+    let value = imagePath;
+    try { value = require(imageAbsolutePath); } catch(err) { }
+    return 'url(' + value + ')';
+}
+
 // 重写scss文件的引入
 var old = require.extensions['.js'];
 require.extensions['.scss'] = function (mod, filename) {
@@ -36,7 +51,10 @@ require.extensions['.scss'] = function (mod, filename) {
 
     mod._compile = function (code, filename) {
         let scssDir = path.dirname(filename);
-        code = '$CDN: "' + config.CDN + '";' + code;
+        let imagePaths = code.match(/url\((.*?)\)/g) || [];
+        for (var i=0; i<imagePaths.length; i++) {
+            code = code.replace(imagePaths[i], replaceImagePath(scssDir, imagePaths[i]));
+        }
         code = loadSass(code, scssDir).replace('\n', '').replace(/\"/g, '\\\"');
         code = `var css = "${code}";module.exports = css;`;
         compile.call(mod, code, filename);
