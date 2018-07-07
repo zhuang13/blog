@@ -9,6 +9,7 @@ import path from 'path'
 import config from 'config'
 
 import routes from 'app/configs/routes.js'
+import proxy from 'utils/proxy.js'
 import { getApp, getStore } from '../page/server.jsx'
 
 let bundleName = 'index.js';
@@ -19,6 +20,14 @@ const server = (req, resp) => {
         resp.write(result);
         resp.end();
         return; 
+    }
+
+    if (/\/v1\//.test(req.url)) {
+        proxy(req, resp, {
+            url: req.url,
+            host: 'http://api.zhuang13.me'
+        })
+        return;
     }
 
     let initStores = []
@@ -50,7 +59,7 @@ const server = (req, resp) => {
         
         const preloadedState = store.getState();
         if (context.url) {
-          redirect(301, context.url)
+            redirect(301, context.url)
         } else {
             resp.write(`
                 <html>

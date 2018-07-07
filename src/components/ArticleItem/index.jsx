@@ -13,24 +13,25 @@ class ArticleItem extends React.Component {
                 <Css cssCode={cssCode} />
                 <h2 className="article-title"> 
                     {
-                        item.from ?
+                        item.source ?
                             <a href={item.url} target="_blank">{item.title}</a> 
-                            : <Link to={item.url}>{item.title}</Link>
+                            : <a href={item.url}>{item.title}</a> 
+                            // <Link to={item.url}>{item.title}</Link>
                     }
                 </h2>
                 {
                     !!item.tags && item.tags.map((tag) => 
-                        <span className="article-tag" key={tag}>{tag}</span>
+                        <span className="article-tag" key={tag.id}>{tag.name}</span>
                     )
                 }
                 {
-                    !!item.from &&
+                    !!item.source &&
                         <blockquote className="article-from">
-                            from {item.from}
+                            from {item.source}
                         </blockquote>
                 }
                 <p className="article-p">
-                    {item.desc}
+                    {item.description}
                 </p>
             </article>
         )

@@ -1,6 +1,6 @@
 {
     "PRODUCTION": true,
-    "CDN": "//www.zhuangbob.com",
+    "CDN": "//static.zhuang13.me",
     "HOST": "//zhuang13.me",
     "PORT": "9527"
 }
