@@ -1,6 +1,7 @@
 'use strict;';
 require('babel-core/register');
 
+var exec = require('child_process').exec; 
 const path = require('path');
 const moduleAlias = require('module-alias');
 moduleAlias.addAliases({
@@ -72,6 +73,7 @@ if (config.PRODUCTION) {
         if (err || stats.hasErrors() || stats.hasWarnings()) {
             console.log('err:', err, output);
         } else {
+            exec('sh moveStatic.sh', function(err,stdout,stderr){console.log('moveStatic.sh', err, stdout,stderr)});
             let bundleName = output.assetsByChunkName.bundle;
             let createApp = require('./src/node/app').default;
             createApp(bundleName);
