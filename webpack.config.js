@@ -16,6 +16,9 @@ module.exports = {
         chunkFilename: '[name].[chunkhash].js'
     },
     plugins: [
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
+        }),
         new HtmlWebpackPlugin({
             template: 'src/index.html'
         }),
@@ -56,7 +59,7 @@ module.exports = {
                     }
                 ]
             },
-            { test: /\.(png|jpg|gif|jpeg)$/, exclude: /node_modules/, loader: "url-loader", query: {limit: 100, name: "assets/images/[name].[hash].[ext]"} }
+            { test: /\.(png|jpg|gif|jpeg)$/, exclude: /node_modules/, loader: "url-loader", query: {limit: 8096, name: "assets/images/[name].[hash].[ext]"} }
         ]
     },
     resolve: {

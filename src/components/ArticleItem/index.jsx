@@ -15,8 +15,7 @@ class ArticleItem extends React.Component {
                     {
                         item.source ?
                             <a href={item.url} target="_blank">{item.title}</a> 
-                            : <a href={item.url}>{item.title}</a> 
-                            // <Link to={item.url}>{item.title}</Link>
+                            : <Link to={item.url}>{item.title}</Link>
                     }
                 </h2>
                 {

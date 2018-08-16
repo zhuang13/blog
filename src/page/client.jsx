@@ -39,9 +39,9 @@ let store = createStore(
 // 首屏组件加载成功后，再render
 let loadNum = 0, loadSum = 0
 
-const isLoadComplete = (comp) => {
+const isLoadComplete = (key, comp) => {
     loadNum++
-    comps[comp.default.WrappedComponent.name] = comp.default
+    comps[key] = comp.default
 
     if (loadNum == loadSum) {
         ReactDOM.render(
@@ -67,6 +67,6 @@ const isLoadComplete = (comp) => {
 routes.some((r) => {
     if (matchPath(location.pathname, r)) {
         loadSum++
-        loads[r.name](isLoadComplete)
+        loads[r.name](isLoadComplete.bind(this, r.name))
     }
 })
