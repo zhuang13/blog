@@ -21,7 +21,7 @@ const server = (req, resp) => {
         // resp.end();
         proxy(req, resp, {
             url: req.url,
-            host: 'http://api.zhuang13.me'
+            host: 'http://static.zhuang13.me'
         })
         return; 
     }
