@@ -16,9 +16,13 @@ let bundleName = 'index.js';
 
 const server = (req, resp) => {
     if (/\/(api|public)\//.test(req.url)) {
-        let result = fs.readFileSync(path.join(__dirname,'..'+req.url));
-        resp.write(result);
-        resp.end();
+        // let result = fs.readFileSync(path.join(__dirname,'..'+req.url));
+        // resp.write(result);
+        // resp.end();
+        proxy(req, resp, {
+            url: req.url,
+            host: 'http://api.zhuang13.me'
+        })
         return; 
     }
 
