@@ -3,7 +3,6 @@
     "name"         : "blog",
     "script"       : "index.js",
     "exec_mode"    : "cluster",
-    "wait-ready"   : true,
     "kill_timeout" : 30000
   }]
 }
