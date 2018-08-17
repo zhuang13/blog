@@ -1,0 +1,7 @@
+{
+  "apps" : [{
+    "name"         : "blog",
+    "script"       : "index.js",
+    "kill_timeout" : 30000
+  }]
+}
