@@ -85,6 +85,5 @@ const server = (req, resp) => {
 
 export default (bname) => {
     bundleName = bname || bundleName;
-    let appServer = app.createServer(server);
-    appServer.listen(config.PORT);
+    app.createServer(server).listen(config.PORT);
 }
