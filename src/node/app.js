@@ -87,5 +87,4 @@ export default (bname) => {
     bundleName = bname || bundleName;
     let appServer = app.createServer(server);
     appServer.listen(config.PORT);
-    return appServer;
 }
