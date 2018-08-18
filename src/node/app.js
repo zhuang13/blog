@@ -83,17 +83,15 @@ const server = (req, resp) => {
     });
 }
 
-setTimeout(() => {
-    let appServer = app.createServer(server);
-    appServer.listen(config.PORT);
-    console.log(`open in ${config.HOST}`);
-    
-    process.on('SIGINT', () => {
-        console.log('Closing server...');
-        appServer.close(() => {
-            console.log('Server closed !!! ');
-            exec('sh bin/moveStatic.sh', function(err,stdout,stderr){console.log('moveStatic.sh', err, stdout,stderr)});
-            process.exit();
-        });
+let appServer = app.createServer(server);
+appServer.listen(config.PORT);
+console.log(`open in ${config.HOST}`);
+
+process.on('SIGINT', () => {
+    console.log('Closing server...');
+    appServer.close(() => {
+        console.log('Server closed !!! ');
+        exec('sh bin/moveStatic.sh', function(err,stdout,stderr){console.log('moveStatic.sh', err, stdout,stderr)});
+        process.exit();
     });
-}, 3000);
+});
