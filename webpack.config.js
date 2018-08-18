@@ -1,7 +1,7 @@
 var webpack = require("webpack");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
+var ManifestPlugin = require('webpack-manifest-plugin');
 var path = require('path');
 var config = require('config');
 
@@ -32,12 +32,7 @@ module.exports = {
             }
         }),
         new CleanWebpackPlugin(['dist']),
-        new CopyWebpackPlugin([ 
-                { from: 'src/api', to: 'api' },
-                { from: 'src/public', to: 'public' }
-            ], {
-                debug: 'warning'
-            })
+        new ManifestPlugin()
     ],
     module: {
         loaders: [

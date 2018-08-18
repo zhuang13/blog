@@ -1,7 +1,6 @@
 'use strict;';
 require('babel-core/register');
 
-var exec = require('child_process').exec; 
 const path = require('path');
 const moduleAlias = require('module-alias');
 moduleAlias.addAliases({
@@ -64,33 +63,4 @@ require.extensions['.scss'] = function (mod, filename) {
     old(mod, filename);
 }
 
-if (config.PRODUCTION) {
-    let webpack = require("webpack");
-    let webpackConfig = require('./webpack.config.js');
-
-    webpack(webpackConfig, (err, stats) => {
-        let output = stats.toJson();
-        if (err || stats.hasErrors() || stats.hasWarnings()) {
-            console.log('err:', err, output);
-        } else {
-            exec('sh moveStatic.sh', function(err,stdout,stderr){console.log('moveStatic.sh', err, stdout,stderr)});
-            let bundleName = output.assetsByChunkName.bundle;
-            let createApp = require('./src/node/app').default;
-            createApp(bundleName);
-            console.log(`open in ${config.HOST}`);
-            process.send('ready');
-        }
-    });
-} else {
-    let createApp = require('./src/node/app').default;
-    createApp();
-    console.log(`open in ${config.HOST}:${config.PORT}`);
-}
-
-process.on('SIGINT', () => {
-    console.log('Closing server...');
-    server.close(() => {
-        console.log('Server closed !!! ');
-        process.exit();
-    });
-});
+require('./src/node/app')

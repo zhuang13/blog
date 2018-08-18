@@ -4,15 +4,15 @@ import { StaticRouter } from 'react-router'
 import { Route, matchPath } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import app from 'http'
-import fs from 'fs'
-import path from 'path'
 import config from 'config'
 
 import routes from 'app/configs/routes.js'
 import proxy from 'utils/proxy.js'
 import { getApp, getStore } from '../page/server.jsx'
 
-let bundleName = 'index.js';
+var exec = require('child_process').exec; 
+const manifestJson = config.PRODUCTION ? require('../../manifest.json') : null;
+const bundleName = manifestJson ? manifestJson["bundle.js"] : 'index.js';
 
 const server = (req, resp) => {
     if (/\/(api|public)\//.test(req.url)) {
@@ -74,7 +74,7 @@ const server = (req, resp) => {
                     <body>
                         <div id="app">${markup}</div>
                         <script>window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState)};</script>
-                        <script type="text/javascript" src="${config.CDN}/${bundleName}"></script>
+                        <script type="text/javascript" src="${bundleName}"></script>
                     </body>
                 </html>
             `);
@@ -83,7 +83,15 @@ const server = (req, resp) => {
     });
 }
 
-export default (bname) => {
-    bundleName = bname || bundleName;
-    app.createServer(server).listen(config.PORT);
-}
+let appServer = app.createServer(server);
+appServer.listen(config.PORT);
+console.log(`open in ${config.HOST}`);
+
+process.on('SIGINT', () => {
+    console.log('Closing server...');
+    appServer.close(() => {
+        console.log('Server closed !!! ');
+        exec('sh bin/moveStatic.sh', function(err,stdout,stderr){console.log('moveStatic.sh', err, stdout,stderr)});
+        process.exit();
+    });
+});
