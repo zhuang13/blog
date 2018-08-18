@@ -1,4 +1,4 @@
-import 'isomorphic-fetch'
+import request from 'superagent'
 
 export default (req, resp, options) => {
     var opt = {
@@ -15,7 +15,6 @@ export default (req, resp, options) => {
             }).on('end', function() {
                 body = Buffer.concat(body).toString()
                 opt.body = body || '';
-                console.log(opt.body);
                 resolve();
             });
         } else {
@@ -23,27 +22,20 @@ export default (req, resp, options) => {
         }
     }).then(() => {
         opt.headers.host = options.host.slice(options.host.indexOf('://')+3).replace(/\/$/,'');
-
-        return fetch(opt.url, {
-            method: opt.method,
-            body: opt.body,
-            headers: opt.headers 
-        })
+        return request(opt.method, opt.url).set(opt.headers).send(opt.body).buffer();
     }).then((res) => {
         resp.statusCode = res.status;
-        if (res.status >= 200 && res.status < 300) {
-            let headers = res.headers._headers;
-            for (var name in headers) {
-                resp.setHeader(name, headers[name]);
-            }
-            res.text().then((result) => {
-                resp.write(result)
-                resp.end()
-            })
-        } else {
-            resp.write(`${res.status} ${res.statusText}`)
-            resp.end()
+        let headers = res.headers._headers;
+        for (var name in headers) {
+            resp.setHeader(name, headers[name]);
         }
-    })
+        resp.write(res.text || res.body);
+        resp.end()
+    }).catch(err => {
+        let res = err.response || {};
+        resp.statusCode = res.status;
+        resp.write(`${res.status} ${err.message}`);
+        resp.end();
+    });
     
 }

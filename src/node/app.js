@@ -16,9 +16,6 @@ let bundleName = 'index.js';
 
 const server = (req, resp) => {
     if (/\/(api|public)\//.test(req.url)) {
-        // let result = fs.readFileSync(path.join(__dirname,'..'+req.url));
-        // resp.write(result);
-        // resp.end();
         proxy(req, resp, {
             url: req.url,
             host: 'http://static.zhuang13.me'
@@ -88,5 +85,13 @@ const server = (req, resp) => {
 
 export default (bname) => {
     bundleName = bname || bundleName;
-    app.createServer(server).listen(config.PORT);
+    let appServer = app.createServer(server).listen(config.PORT);
+
+    process.on('SIGINT', () => {
+        console.log('Closing server...');
+        appServer.close(() => {
+            console.log('Server closed !!! ');
+            process.exit();
+        });
+    });
 }

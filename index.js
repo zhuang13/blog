@@ -86,11 +86,3 @@ if (config.PRODUCTION) {
     createApp();
     console.log(`open in ${config.HOST}:${config.PORT}`);
 }
-
-process.on('SIGINT', () => {
-    console.log('Closing server...');
-    server.close(() => {
-        console.log('Server closed !!! ');
-        process.exit();
-    });
-});
