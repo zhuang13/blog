@@ -85,7 +85,8 @@ const server = (req, resp) => {
 
 export default (bname) => {
     bundleName = bname || bundleName;
-    let appServer = app.createServer(server).listen(config.PORT);
+    let appServer = app.createServer(server);
+    appServer.listen(config.PORT);
 
     process.on('SIGINT', () => {
         console.log('Closing server...');
