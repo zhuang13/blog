@@ -18,7 +18,7 @@ const server = (req, resp) => {
     if (/\/(api|public)\//.test(req.url)) {
         proxy(req, resp, {
             url: req.url,
-            host: config.CDN
+            host: `http:${config.CDN}`
         })
         return; 
     }
