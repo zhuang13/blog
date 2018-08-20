@@ -11,14 +11,14 @@ import proxy from 'utils/proxy.js'
 import { getApp, getStore } from '../page/server.jsx'
 
 var exec = require('child_process').exec; 
-const manifestJson = config.PRODUCTION ? require('../../manifest.json') : null;
+const manifestJson = config.PRODUCTION ? require('../../manifest.json') : {"bundle.js": `${config.CDN}/index.js`};
 const bundleName = manifestJson ? manifestJson["bundle.js"] : 'index.js';
 
 const server = (req, resp) => {
     if (/\/(api|public)\//.test(req.url)) {
         proxy(req, resp, {
             url: req.url,
-            host: 'http://static.zhuang13.me'
+            host: config.CDN
         })
         return; 
     }
@@ -26,7 +26,7 @@ const server = (req, resp) => {
     if (/\/v1\//.test(req.url)) {
         proxy(req, resp, {
             url: req.url,
-            host: 'http://api.zhuang13.me'
+            host: config.API
         })
         return;
     }

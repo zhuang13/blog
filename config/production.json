@@ -2,5 +2,6 @@
     "PRODUCTION": true,
     "CDN": "//static.zhuang13.me",
     "HOST": "//zhuang13.me",
-    "PORT": "9527"
+    "PORT": "9527",
+    "API": "http://api.zhuang13.me"
 }
