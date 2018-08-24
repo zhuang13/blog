@@ -10,8 +10,8 @@ import routes from 'app/configs/routes.js'
 import proxy from 'utils/proxy.js'
 import { getApp, getStore } from '../page/server.jsx'
 
-var exec = require('child_process').exec; 
-const manifestJson = config.PRODUCTION ? require('../../manifest.json') : {"bundle.js": `${config.CDN}/index.js`};
+var exec = require('child_process').exec;
+const manifestJson = config.PRODUCTION ? require('../../manifest.json') : { "bundle.js": `${config.CDN}/index.js` };
 const bundleName = manifestJson ? manifestJson["bundle.js"] : 'index.js';
 
 const server = (req, resp) => {
@@ -20,7 +20,7 @@ const server = (req, resp) => {
             url: req.url,
             host: `http:${config.CDN}`
         })
-        return; 
+        return;
     }
 
     if (/\/v1\//.test(req.url)) {
@@ -37,8 +37,8 @@ const server = (req, resp) => {
         const match = matchPath(req.url, r)
         let component;
         if (match) {
-            component = require(r.src).default 
-            initStores.push({initStore: r.initStore, params: match.params})
+            component = require(r.src).default
+            initStores.push({ initStore: r.initStore, params: match.params })
         }
         return <Route key={r.src} {...r} component={component} />
     })
@@ -57,7 +57,7 @@ const server = (req, resp) => {
                 </StaticRouter>
             </Provider>
         )
-        
+
         const preloadedState = store.getState();
         if (context.url) {
             redirect(301, context.url)
@@ -85,13 +85,13 @@ const server = (req, resp) => {
 
 let appServer = app.createServer(server);
 appServer.listen(config.PORT);
+exec('sh bin/moveStatic.sh', function (err, stdout, stderr) { console.log('moveStatic.sh', err, stdout, stderr) });
 console.log(`open in ${config.HOST}`);
 
 process.on('SIGINT', () => {
     console.log('Closing server...');
     appServer.close(() => {
         console.log('Server closed !!! ');
-        exec('sh bin/moveStatic.sh', function(err,stdout,stderr){console.log('moveStatic.sh', err, stdout,stderr)});
         process.exit();
     });
 });
