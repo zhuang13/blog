@@ -26,6 +26,9 @@ echo 'build...'
 npm run build || exit
 echo 'build end!!'
 
+echo ''
+echo '-----------------'
+echo ''
 echo 'move manifest.json...'
 mv -f ./dist/manifest.json ./manifest.json
 echo 'move end!'
