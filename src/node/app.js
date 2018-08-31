@@ -11,7 +11,7 @@ import proxy from 'utils/proxy.js'
 import { getApp, getStore } from '../page/server.jsx'
 
 var exec = require('child_process').exec;
-const manifestJson = config.PRODUCTION ? require('../../manifest.json') : { "bundle.js": `${config.CDN}/index.js` };
+const manifestJson = config.PRODUCTION ? require('../../dist/manifest.json') : { "bundle.js": `${config.CDN}/index.js` };
 const bundleName = manifestJson ? manifestJson["bundle.js"] : 'index.js';
 
 const server = (req, resp) => {
