@@ -31,8 +31,6 @@ echo 'build end!!'
 echo ''
 echo '-----------------'
 echo ''
-echo 'move manifest.json...'
-mv -f ./dist/manifest.json ./manifest.json
 echo 'move static...'
 rsync -av ./dist/ /usr/share/nginx/html/static.zhuang13.me/
 echo 'move end!'
