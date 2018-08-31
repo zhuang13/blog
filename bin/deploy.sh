@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+cd ~/node/zhuang13.me
+
 echo ''
 echo 'pull remote branch...'
 git reset --hard
@@ -31,6 +33,8 @@ echo '-----------------'
 echo ''
 echo 'move manifest.json...'
 mv -f ./dist/manifest.json ./manifest.json
+echo 'move static...'
+rsync ./dist/ /usr/share/nginx/html/static.zhuang13.me/
 echo 'move end!'
 
 echo ''

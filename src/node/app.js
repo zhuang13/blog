@@ -85,7 +85,6 @@ const server = (req, resp) => {
 
 let appServer = app.createServer(server);
 appServer.listen(config.PORT);
-exec('sh bin/moveStatic.sh', function (err, stdout, stderr) { console.log('moveStatic.sh', err, stdout, stderr) });
 console.log(`open in ${config.HOST}`);
 
 process.on('SIGINT', () => {
