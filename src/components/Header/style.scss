@@ -3,17 +3,52 @@
 .header { 
     padding: 20px; overflow: hidden;
 
+    &-gohome {
+        display: block;
+        position: relative;
+        margin: 0 auto;
+        width: 100px;
+        height: 130px;
+    }
+
     &-logo { 
-        float: none; 
-        width: 90px; 
-        height: 50px; 
-        margin: 15px auto; 
-        background: url(../../assets/images/test.png) no-repeat 0 0;
-        // -webkit-animation:run 350ms steps(1) infinite 0s; 
+        float: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100px;
+        height: 100px;
+        color: #42b983;
+        line-height: 100px;
+        font-weight: 400;
+        font-size: 55px;
+        border-radius: 5px;
+        text-align: center;
+        margin: 15px auto;
+        transform-origin: 38% 38%;
+        background-color: #34495e;
+        opacity: 0.9;
+
+        &.logo1 {
+            z-index: 3;
+        }
+
+        &.logo2 {
+            z-index: 2;
+            animation: header-logo2 1s .5s forwards;
+        }
+
+        &.logo3 {
+            z-index: 1;
+            animation: header-logo3 1s .5s forwards;
+        }
     }
 
     &-nav { 
-        float: none; font-size: 16px;
+        float: none; 
+        font-size: 16px; 
+        margin-top: 15px;
+
         &-list { text-align: center; }
         &-item { 
             padding: 25px; display: inline-block; text-align: center; 
@@ -51,4 +86,16 @@
 	100% {
        background-position:-450px 0;
     }
+}
+
+@keyframes header-logo2
+{
+	from { opacity: 0.9; transform: rotate(0deg); }
+	to { opacity: 0.7; transform: rotate(7deg); }
+}
+
+@keyframes header-logo3
+{
+	from { opacity: 0.9; transform: rotate(0deg); }
+	to { opacity: 0.5; transform: rotate(14deg); }
 }

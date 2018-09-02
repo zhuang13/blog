@@ -1,7 +1,8 @@
 import React from 'react'
 import { Route, Link } from 'react-router-dom'
 import connect from 'utils/connect.js'
-import './style.scss'
+import Css from 'utils/css.jsx'
+import cssCode from './style.scss'
 
 class ArticleItem extends React.Component {
 
@@ -9,26 +10,27 @@ class ArticleItem extends React.Component {
         const item = this.props.item;
         return (
             <article className="article-intro">
+                <Css cssCode={cssCode} />
                 <h2 className="article-title"> 
                     {
-                        item.from ?
+                        item.source ?
                             <a href={item.url} target="_blank">{item.title}</a> 
                             : <Link to={item.url}>{item.title}</Link>
                     }
                 </h2>
                 {
                     !!item.tags && item.tags.map((tag) => 
-                        <span className="article-tag" key={tag}>{tag}</span>
+                        <span className="article-tag" key={tag.id}>{tag.name}</span>
                     )
                 }
                 {
-                    !!item.from &&
+                    !!item.source &&
                         <blockquote className="article-from">
-                            from {item.from}
+                            from {item.source}
                         </blockquote>
                 }
                 <p className="article-p">
-                    {item.desc}
+                    {item.description}
                 </p>
             </article>
         )

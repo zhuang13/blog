@@ -2,20 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import connect from 'utils/connect.js'
-import './style.scss'
-
-import img from 'assets/images/test.png'
+import Css from 'utils/css.jsx'
+import cssCode from './style.scss'
 
 class Header extends React.Component {
     static contextTypes = {
         router: PropTypes.object
-    }
-
-    componentWillMount() {
-        const { pathname } = this.props.location;
-        let nav = pathname.slice(1, pathname.length);
-        nav = nav == 'about' ? nav : 'blog'
-        this.props.actions.changeCurrentNav(nav);
     }
 
     changePage(nav) {
@@ -30,12 +22,17 @@ class Header extends React.Component {
         navClass[currentNav] = 'select';
         return (
             <header className="header">
-                <a className="header-gohome"><div className="header-logo"></div></a>
+                <Css cssCode={cssCode} />
+                <a className="header-gohome">
+                    <div className="header-logo logo1">Z</div>
+                    <div className="header-logo logo2"></div>
+                    <div className="header-logo logo3"></div>
+                </a>
                 <nav className="header-nav">
-                <ul className="header-nav-list">
-                    <li className="header-nav-item"><a onClick={this.changePage.bind(this, '')} className={navClass.blog}>BLOG</a></li>
-                    <li className="header-nav-item"><a onClick={this.changePage.bind(this, 'about')} className={navClass.about}>ABOUT</a></li>
-                </ul>
+                    <ul className="header-nav-list">
+                        <li className="header-nav-item"><a onClick={this.changePage.bind(this, '')} className={navClass.blog}>BLOG</a></li>
+                        <li className="header-nav-item"><a onClick={this.changePage.bind(this, 'about')} className={navClass.about}>ABOUT</a></li>
+                    </ul>
                 </nav>
             </header>
         )

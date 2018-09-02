@@ -1,0 +1,11 @@
+{
+  "apps" : [{
+    "name"         : "blog",
+    "script"       : "index.js",
+    "instances"    : "max",
+    "exec_mode"    : "cluster",
+    "wait-ready"   : true,
+    "kill_timeout" : 30000,
+    "listen_timeout" : 30000
+  }]
+}
