@@ -5,7 +5,7 @@ cd ~/node/zhuang13.me
 echo ''
 echo 'pull remote branch...'
 git reset --hard
-git pull origin feature/isomorphic || exit
+git pull origin feature/master || exit
 echo 'pull end!'
 
 echo ''
