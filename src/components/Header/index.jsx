@@ -23,12 +23,16 @@ class Header extends React.Component {
         return (
             <header className="header">
                 <Css cssCode={cssCode} />
-                <a className="header-gohome"><div className="header-logo"></div></a>
+                <a className="header-gohome">
+                    <div className="header-logo logo1">Z</div>
+                    <div className="header-logo logo2"></div>
+                    <div className="header-logo logo3"></div>
+                </a>
                 <nav className="header-nav">
-                <ul className="header-nav-list">
-                    <li className="header-nav-item"><a onClick={this.changePage.bind(this, '')} className={navClass.blog}>BLOG</a></li>
-                    <li className="header-nav-item"><a onClick={this.changePage.bind(this, 'about')} className={navClass.about}>ABOUT</a></li>
-                </ul>
+                    <ul className="header-nav-list">
+                        <li className="header-nav-item"><a onClick={this.changePage.bind(this, '')} className={navClass.blog}>BLOG</a></li>
+                        <li className="header-nav-item"><a onClick={this.changePage.bind(this, 'about')} className={navClass.about}>ABOUT</a></li>
+                    </ul>
                 </nav>
             </header>
         )
