@@ -9,7 +9,7 @@ class Footer extends React.Component {
         return (
             <footer className="footer">
                 <Css cssCode={cssCode} />
-                © 2018 zhuang13.me, powered by zhuang13
+                © 2018 orzhuang.com, powered by zhuang13
             </footer>
         )
     }

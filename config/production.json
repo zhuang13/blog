@@ -1,7 +1,7 @@
 {
     "PRODUCTION": true,
-    "CDN": "//static.zhuang13.me",
-    "HOST": "//zhuang13.me",
+    "CDN": "//static.orzhuang.com",
+    "HOST": "//orzhuang.me",
     "PORT": "9527",
-    "API": "http://api.zhuang13.me"
+    "API": "http://api.orzhuang.com"
 }
